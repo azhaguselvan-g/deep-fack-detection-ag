@@ -180,11 +180,11 @@ button {
 }
 
 .nav-shell {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.85rem;
-  padding: 0.8rem 0.9rem;
+  padding: 0.85rem 0.95rem;
   border-radius: 24px;
 }
 
@@ -193,7 +193,7 @@ button {
   align-items: center;
   gap: 0.8rem;
   min-width: 0;
-  grid-area: brand;
+  flex: 1 1 auto;
 }
 
 .brand-mark {
@@ -210,6 +210,7 @@ button {
 .brand-copy {
   display: grid;
   gap: 0.12rem;
+  min-width: 0;
 }
 
 .brand strong {
@@ -298,6 +299,8 @@ button {
     background-color var(--transition),
     border-color var(--transition),
     box-shadow var(--transition);
+  flex: 0 0 auto;
+  align-self: center;
 }
 
 .nav-toggle:hover,
@@ -507,8 +510,8 @@ button {
 .hero-copy h1 {
   margin: 0.65rem 0 0.9rem;
   font-family: "Space Grotesk", "Manrope", sans-serif;
-  font-size: clamp(2.9rem, 12vw, 6.25rem);
-  line-height: 0.96;
+  font-size: clamp(2.55rem, 6.2vw, 4.9rem);
+  line-height: 1;
   letter-spacing: -0.05em;
   text-wrap: balance;
   background: linear-gradient(120deg, #ffffff 0%, #9eefff 30%, #7fb4ff 60%, #ffe1b3 100%);
@@ -746,14 +749,17 @@ button {
 .tab-switch {
   display: grid;
   gap: 0.55rem;
-  padding: 0.5rem;
+  width: min(100%, 34rem);
+  margin-inline: auto;
+  padding: 0.35rem;
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .tab-button {
-  min-height: 3rem;
+  min-height: 2.7rem;
+  padding: 0.7rem 1rem;
   border-radius: 999px;
   color: var(--text-secondary);
   cursor: pointer;
@@ -1252,11 +1258,12 @@ button {
   }
 
   .nav-shell {
+    display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "brand actions"
       "links links";
-    padding: 0.88rem 1rem;
+    padding: 0.9rem 1rem;
     border-radius: 28px;
   }
 
@@ -1368,6 +1375,16 @@ button {
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas: "brand links actions";
     border-radius: 999px;
+  }
+
+  .tab-switch {
+    width: min(100%, 31rem);
+    padding: 0.3rem;
+  }
+
+  .tab-button {
+    min-height: 2.55rem;
+    padding-block: 0.6rem;
   }
 
   .nav-main {
