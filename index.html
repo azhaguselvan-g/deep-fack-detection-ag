@@ -23,8 +23,8 @@
     <div class="particle-field" id="particleField" aria-hidden="true"></div>
 
     <header class="site-header">
-      <div class="container">
-        <nav class="nav-shell glass-panel reveal">
+      <div class="container header-stack">
+        <nav class="nav-shell glass-panel reveal" aria-label="Primary navigation">
           <a class="brand" href="#hero" aria-label="DeepVision home">
             <span class="brand-mark">
               <svg viewBox="0 0 48 48" aria-hidden="true">
@@ -42,21 +42,65 @@
                 <circle cx="28.5" cy="22.5" r="4.5" fill="#dffcff" />
               </svg>
             </span>
-            <span>
+            <span class="brand-copy">
               <strong>DeepVision</strong>
               <small>Detection Studio</small>
             </span>
           </a>
 
-          <div class="nav-links" aria-label="Primary">
-            <a href="#hero">Overview</a>
-            <a href="#upload">Upload</a>
-            <a href="#preview">Preview</a>
-            <a href="#results">Results</a>
+          <div class="nav-main">
+            <div class="nav-links" aria-label="Section links">
+              <a href="#hero">Overview</a>
+              <a href="#upload">Upload</a>
+              <a href="#preview">Preview</a>
+              <a href="#results">Results</a>
+            </div>
           </div>
 
-          <a class="button nav-cta ripple-button" href="#upload">Launch Scan</a>
+          <div class="nav-actions">
+            <a class="button primary ripple-button nav-launch" href="#upload">Launch Scan</a>
+            <button class="button secondary ripple-button auth-trigger" type="button" data-auth-mode="signin">
+              Sign In
+            </button>
+            <button class="button ghost ripple-button auth-trigger" type="button" data-auth-mode="signup">
+              Sign Up
+            </button>
+          </div>
+
+          <button
+            class="nav-toggle"
+            id="navToggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="mobileMenuWrap"
+            aria-label="Open navigation menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </nav>
+
+        <div class="mobile-menu-wrap" id="mobileMenuWrap" aria-hidden="true">
+          <div class="mobile-menu glass-panel">
+            <nav class="mobile-nav-links" aria-label="Mobile navigation">
+              <a href="#hero">Overview</a>
+              <a href="#upload">Upload</a>
+              <a href="#preview">Preview</a>
+              <a href="#results">Results</a>
+            </nav>
+
+            <div class="mobile-menu-actions">
+              <a class="button primary ripple-button" href="#upload">Launch Scan</a>
+              <button class="button secondary ripple-button auth-trigger" type="button" data-auth-mode="signin">
+                Sign In
+              </button>
+              <button class="button ghost ripple-button auth-trigger" type="button" data-auth-mode="signup">
+                Sign Up
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -77,7 +121,7 @@
             </div>
 
             <div class="hero-highlights">
-              <span>Image + video workflows</span>
+              <span>Image plus video workflows</span>
               <span>Motion-rich glass UI</span>
               <span>Fully responsive layout</span>
             </div>
@@ -221,7 +265,7 @@
               <span class="panel-badge" id="previewModeBadge">IMAGE</span>
             </div>
 
-            <div class="preview-stage" id="previewStage">
+            <div class="preview-stage">
               <div class="preview-empty" id="previewEmpty">
                 <span class="preview-empty-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24">
@@ -366,5 +410,76 @@
         </div>
       </div>
     </footer>
+
+    <div class="modal-overlay" id="authModal" aria-hidden="true">
+      <div
+        class="auth-modal glass-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="authTitle"
+        aria-describedby="authDescription"
+      >
+        <button class="modal-close" id="authClose" type="button" aria-label="Close authentication dialog">
+          <span></span>
+          <span></span>
+        </button>
+
+        <div class="auth-tabs" role="tablist" aria-label="Authentication tabs">
+          <button class="auth-tab is-active" type="button" data-auth-mode="signin" aria-selected="true">
+            Sign In
+          </button>
+          <button class="auth-tab" type="button" data-auth-mode="signup" aria-selected="false">
+            Sign Up
+          </button>
+        </div>
+
+        <div class="auth-copy">
+          <span class="modal-kicker">Secure access</span>
+          <h2 id="authTitle">Welcome back</h2>
+          <p id="authDescription">
+            Sign in to access your detection workspace, saved previews, and scan history.
+          </p>
+        </div>
+
+        <form class="auth-form" id="authForm" novalidate>
+          <label class="form-field">
+            <span>Email or mobile</span>
+            <input
+              id="authIdentity"
+              type="text"
+              inputmode="email"
+              autocomplete="username"
+              placeholder="Enter your email or mobile number"
+            />
+          </label>
+
+          <label class="form-field">
+            <span>Password</span>
+            <input
+              id="authPassword"
+              type="password"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+            />
+          </label>
+
+          <button class="button primary auth-submit ripple-button" id="authSubmit" type="submit">
+            Login
+          </button>
+
+          <div class="auth-divider" aria-hidden="true">
+            <span></span>
+            <p>OR</p>
+            <span></span>
+          </div>
+
+          <button class="button linkedin-button ripple-button" type="button">
+            Continue with LinkedIn
+          </button>
+        </form>
+
+        <p class="auth-note" id="authNote">Demo authentication UI only. No backend is connected.</p>
+      </div>
+    </div>
   </body>
 </html>

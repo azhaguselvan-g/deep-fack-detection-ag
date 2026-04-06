@@ -21,14 +21,38 @@ const modeConfig = {
   },
 };
 
+const authModeConfig = {
+  signin: {
+    title: "Welcome back",
+    description: "Sign in to access your detection workspace, saved previews, and scan history.",
+    submitLabel: "Login",
+    note: "Demo authentication UI only. No backend is connected.",
+    passwordPlaceholder: "Enter your password",
+    passwordAutocomplete: "current-password",
+  },
+  signup: {
+    title: "Create your account",
+    description: "Sign up to unlock secure scan history, premium dashboards, and collaboration workflows.",
+    submitLabel: "Create account",
+    note: "Demo sign-up UI only. Account creation is not connected yet.",
+    passwordPlaceholder: "Create a password",
+    passwordAutocomplete: "new-password",
+  },
+};
+
 const state = {
   mode: "image",
   file: null,
   objectUrl: null,
   dragDepth: 0,
   analysisTimer: null,
+  isMenuOpen: false,
+  isModalOpen: false,
+  authMode: "signin",
+  lastAuthTrigger: null,
 };
 
+const body = document.body;
 const fileInput = document.getElementById("fileInput");
 const dropzone = document.getElementById("dropzone");
 const dropzoneTitle = document.getElementById("dropzoneTitle");
@@ -53,6 +77,17 @@ const confidenceText = document.getElementById("confidenceText");
 const progressValue = document.getElementById("progressValue");
 const progressBar = document.getElementById("progressBar");
 const resultSummary = document.getElementById("resultSummary");
+const navToggle = document.getElementById("navToggle");
+const mobileMenuWrap = document.getElementById("mobileMenuWrap");
+const authModal = document.getElementById("authModal");
+const authClose = document.getElementById("authClose");
+const authTitle = document.getElementById("authTitle");
+const authDescription = document.getElementById("authDescription");
+const authSubmit = document.getElementById("authSubmit");
+const authNote = document.getElementById("authNote");
+const authForm = document.getElementById("authForm");
+const authPassword = document.getElementById("authPassword");
+const authIdentity = document.getElementById("authIdentity");
 
 const metricNodes = [
   {
@@ -73,10 +108,14 @@ function init() {
   createParticles();
   initRevealObserver();
   initRipples();
-  bindTabs();
+  bindDetectionTabs();
   bindUploads();
   bindActions();
+  bindNavigation();
+  bindAuth();
   syncModeUI();
+  syncMobileMenu();
+  syncAuthMode();
 }
 
 function createParticles() {
@@ -134,7 +173,7 @@ function initRipples() {
   });
 }
 
-function bindTabs() {
+function bindDetectionTabs() {
   document.querySelectorAll(".tab-button").forEach((button) => {
     button.addEventListener("click", () => {
       const nextMode = button.dataset.mode;
@@ -191,6 +230,61 @@ function bindActions() {
   clearButton.addEventListener("click", resetMediaState);
 }
 
+function bindNavigation() {
+  navToggle.addEventListener("click", () => {
+    state.isMenuOpen = !state.isMenuOpen;
+    syncMobileMenu();
+  });
+
+  document.querySelectorAll(".mobile-nav-links a, .mobile-menu-actions a").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && state.isMenuOpen) {
+      closeMobileMenu();
+    }
+  });
+}
+
+function bindAuth() {
+  document.querySelectorAll(".auth-trigger").forEach((button) => {
+    button.addEventListener("click", () => {
+      openAuthModal(button.dataset.authMode || "signin");
+    });
+  });
+
+  document.querySelectorAll(".auth-tab").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.authMode = button.dataset.authMode || "signin";
+      syncAuthMode();
+    });
+  });
+
+  authClose.addEventListener("click", closeAuthModal);
+
+  authModal.addEventListener("click", (event) => {
+    if (event.target === authModal) {
+      closeAuthModal();
+    }
+  });
+
+  authForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    authNote.textContent = "This authentication flow is a polished front-end demo only.";
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      if (state.isModalOpen) {
+        closeAuthModal();
+      } else if (state.isMenuOpen) {
+        closeMobileMenu();
+      }
+    }
+  });
+}
+
 function syncModeUI() {
   const config = modeConfig[state.mode];
 
@@ -213,6 +307,72 @@ function syncModeUI() {
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-selected", String(isActive));
   });
+}
+
+function syncMobileMenu() {
+  navToggle.classList.toggle("is-open", state.isMenuOpen);
+  navToggle.setAttribute("aria-expanded", String(state.isMenuOpen));
+  navToggle.setAttribute("aria-label", state.isMenuOpen ? "Close navigation menu" : "Open navigation menu");
+  mobileMenuWrap.classList.toggle("is-open", state.isMenuOpen);
+  mobileMenuWrap.setAttribute("aria-hidden", String(!state.isMenuOpen));
+}
+
+function closeMobileMenu() {
+  if (!state.isMenuOpen) {
+    return;
+  }
+
+  state.isMenuOpen = false;
+  syncMobileMenu();
+}
+
+function syncAuthMode() {
+  const config = authModeConfig[state.authMode];
+
+  authTitle.textContent = config.title;
+  authDescription.textContent = config.description;
+  authSubmit.textContent = config.submitLabel;
+  authNote.textContent = config.note;
+  authPassword.placeholder = config.passwordPlaceholder;
+  authPassword.setAttribute("autocomplete", config.passwordAutocomplete);
+
+  document.querySelectorAll(".auth-tab").forEach((button) => {
+    const isActive = button.dataset.authMode === state.authMode;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-selected", String(isActive));
+  });
+}
+
+function openAuthModal(mode = "signin") {
+  closeMobileMenu();
+  state.authMode = mode;
+  state.isModalOpen = true;
+  state.lastAuthTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  syncAuthMode();
+  authForm.reset();
+  authModal.classList.add("is-open");
+  authModal.setAttribute("aria-hidden", "false");
+  body.classList.add("is-modal-open");
+
+  window.setTimeout(() => {
+    authIdentity.focus();
+  }, 120);
+}
+
+function closeAuthModal() {
+  if (!state.isModalOpen) {
+    return;
+  }
+
+  state.isModalOpen = false;
+  authModal.classList.remove("is-open");
+  authModal.setAttribute("aria-hidden", "true");
+  body.classList.remove("is-modal-open");
+
+  if (state.lastAuthTrigger) {
+    state.lastAuthTrigger.focus();
+    state.lastAuthTrigger = null;
+  }
 }
 
 function handleFile(file) {
