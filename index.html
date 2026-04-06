@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DeepVision is a premium glassmorphism deepfake detection frontend concept for image and video analysis."
+    />
+    <title>DeepVision | Deepfake Detection Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="page-backdrop" aria-hidden="true"></div>
+    <div class="grid-overlay" aria-hidden="true"></div>
+    <div class="particle-field" id="particleField" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="container">
+        <nav class="nav-shell glass-panel reveal">
+          <a class="brand" href="#hero" aria-label="DeepVision home">
+            <span class="brand-mark">
+              <svg viewBox="0 0 48 48" aria-hidden="true">
+                <defs>
+                  <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#7bf7ff" />
+                    <stop offset="100%" stop-color="#3d89ff" />
+                  </linearGradient>
+                </defs>
+                <rect x="4" y="4" width="40" height="40" rx="13" fill="url(#brandGradient)" />
+                <path
+                  d="M15 28.5c5.5-12.2 12-16.5 18.5-13.5 4.6 2.2 5.4 7.4 3.2 12.7-2.1 5-6.9 8.1-12.8 7.8C18.8 35.1 16 32.8 15 28.5Z"
+                  fill="rgba(5, 9, 22, 0.82)"
+                />
+                <circle cx="28.5" cy="22.5" r="4.5" fill="#dffcff" />
+              </svg>
+            </span>
+            <span>
+              <strong>DeepVision</strong>
+              <small>Detection Studio</small>
+            </span>
+          </a>
+
+          <div class="nav-links" aria-label="Primary">
+            <a href="#hero">Overview</a>
+            <a href="#upload">Upload</a>
+            <a href="#preview">Preview</a>
+            <a href="#results">Results</a>
+          </div>
+
+          <a class="button nav-cta ripple-button" href="#upload">Launch Scan</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero container">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <span class="eyebrow">Synthetic media intelligence</span>
+            <h1>Detect manipulated content with cinematic clarity.</h1>
+            <p class="hero-subtitle">
+              A modern front-end concept for deepfake analysis with premium glassmorphism,
+              fluid responsiveness, animated feedback, and instant image or video previews.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary ripple-button" href="#upload">Try Demo Detection</a>
+              <a class="button secondary ripple-button" href="#results">Explore Results UI</a>
+            </div>
+
+            <div class="hero-highlights">
+              <span>Image + video workflows</span>
+              <span>Motion-rich glass UI</span>
+              <span>Fully responsive layout</span>
+            </div>
+          </div>
+
+          <aside class="hero-panel glass-panel reveal" aria-label="Product overview">
+            <div class="hero-panel-top">
+              <span class="chip">Realtime concept</span>
+              <span class="chip chip-secondary">Front-end only</span>
+            </div>
+
+            <div class="signal-display">
+              <div class="signal-orb">
+                <span class="signal-ring signal-ring-one"></span>
+                <span class="signal-ring signal-ring-two"></span>
+                <span class="signal-core"></span>
+              </div>
+
+              <div class="signal-bars" aria-hidden="true">
+                <span style="--bar-height: 36%"></span>
+                <span style="--bar-height: 58%"></span>
+                <span style="--bar-height: 76%"></span>
+                <span style="--bar-height: 49%"></span>
+                <span style="--bar-height: 89%"></span>
+                <span style="--bar-height: 64%"></span>
+                <span style="--bar-height: 42%"></span>
+                <span style="--bar-height: 71%"></span>
+              </div>
+            </div>
+
+            <div class="hero-stats">
+              <article class="stat-card">
+                <span>Preview latency</span>
+                <strong>240ms</strong>
+              </article>
+              <article class="stat-card">
+                <span>Media modes</span>
+                <strong>2 pipelines</strong>
+              </article>
+              <article class="stat-card">
+                <span>Responsive range</span>
+                <strong>Mobile to 4K</strong>
+              </article>
+              <article class="stat-card">
+                <span>Visual system</span>
+                <strong>Aurora glass</strong>
+              </article>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section-shell container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Detection workspace</span>
+          <h2>Upload, preview, and inspect results in one streamlined flow.</h2>
+          <p>
+            The interface adapts fluidly across screens while keeping controls touch-friendly,
+            aligned, and visually consistent.
+          </p>
+        </div>
+
+        <div class="workspace-grid">
+          <section id="upload" class="glass-panel panel upload-panel reveal">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Upload center</span>
+                <h3>Drop media to begin analysis</h3>
+              </div>
+              <span class="panel-dot"></span>
+            </div>
+
+            <div class="tab-switch" role="tablist" aria-label="Detection mode">
+              <button
+                class="tab-button is-active"
+                type="button"
+                data-mode="image"
+                role="tab"
+                aria-selected="true"
+              >
+                Image Detection
+              </button>
+              <button
+                class="tab-button"
+                type="button"
+                data-mode="video"
+                role="tab"
+                aria-selected="false"
+              >
+                Video Detection
+              </button>
+            </div>
+
+            <label class="dropzone" id="dropzone" for="fileInput">
+              <input id="fileInput" type="file" accept="image/*" hidden />
+              <span class="dropzone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 4v10m0-10 4 4m-4-4L8 8m-3 8.5A3.5 3.5 0 0 1 8.5 13H9a4 4 0 0 1 7.77-1.35A3.25 3.25 0 1 1 18.25 20H8.5A3.5 3.5 0 0 1 5 16.5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                  />
+                </svg>
+              </span>
+              <div class="dropzone-copy">
+                <h3 id="dropzoneTitle">Drop an image to start</h3>
+                <p id="dropzoneHint">
+                  Supports JPG, PNG, WEBP, and HEIC demo previews with drag-and-drop or tap
+                  upload.
+                </p>
+              </div>
+              <div class="dropzone-meta">
+                <span>Drag and drop</span>
+                <span>Click to browse</span>
+                <span>Dummy AI result</span>
+              </div>
+            </label>
+
+            <div class="upload-footer">
+              <div class="file-meta" id="fileMeta">No media selected yet.</div>
+              <div class="action-row">
+                <button class="button tertiary ripple-button" id="clearButton" type="button" disabled>
+                  Clear
+                </button>
+                <button class="button primary ripple-button" id="analyzeButton" type="button" disabled>
+                  Run Demo Scan
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section id="preview" class="glass-panel panel preview-panel reveal">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Preview</span>
+                <h3>Live media viewport</h3>
+              </div>
+              <span class="panel-badge" id="previewModeBadge">IMAGE</span>
+            </div>
+
+            <div class="preview-stage" id="previewStage">
+              <div class="preview-empty" id="previewEmpty">
+                <span class="preview-empty-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path
+                      d="M4.75 18.25h14.5a1.5 1.5 0 0 0 1.5-1.5V7.25a1.5 1.5 0 0 0-1.5-1.5H4.75a1.5 1.5 0 0 0-1.5 1.5v9.5a1.5 1.5 0 0 0 1.5 1.5Zm0 0 4.5-5.25 3.5 4.25 2.75-3.25 3.75 4.25"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                    />
+                    <circle cx="9" cy="9.25" r="1.5" fill="currentColor" />
+                  </svg>
+                </span>
+                <h4 id="previewTitle">Your uploaded image will appear here</h4>
+                <p id="previewHint">
+                  Drop content into the upload panel to activate instant image or video preview.
+                </p>
+              </div>
+
+              <img id="imagePreview" class="preview-media" alt="Uploaded image preview" hidden />
+              <video
+                id="videoPreview"
+                class="preview-media"
+                controls
+                playsinline
+                preload="metadata"
+                hidden
+              ></video>
+            </div>
+
+            <div class="preview-meta-row">
+              <div>
+                <span class="meta-label">Selected file</span>
+                <strong id="previewFileName">Awaiting upload</strong>
+              </div>
+              <div>
+                <span class="meta-label">Mode</span>
+                <strong id="previewModeText">Image detection</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="results" class="glass-panel panel result-panel reveal">
+            <div class="panel-head">
+              <div>
+                <span class="panel-kicker">Analysis result</span>
+                <h3>Dummy verdict and confidence</h3>
+              </div>
+              <span class="panel-badge" id="resultModeBadge">IMAGE</span>
+            </div>
+
+            <div class="result-empty" id="resultEmpty">
+              <span class="result-empty-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M12 3.75 4.5 7.5v4.75c0 4.5 3.25 7.9 7.5 8.75 4.25-.85 7.5-4.25 7.5-8.75V7.5L12 3.75Zm0 5.25v4m0 3h.01"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                  />
+                </svg>
+              </span>
+              <h4>Run a demo scan to reveal the detection card</h4>
+              <p>
+                Once media is uploaded, the interface simulates analysis with loading feedback,
+                animated progress, and a polished result summary.
+              </p>
+            </div>
+
+            <div class="loading-state" id="loadingState" hidden>
+              <div class="spinner" aria-hidden="true"></div>
+              <div class="loading-copy">
+                <strong>Inspecting synthetic media signals</strong>
+                <p>Evaluating facial geometry, frame coherence, and low-level artifact patterns.</p>
+              </div>
+              <div class="loading-skeletons" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+
+            <div class="result-card" id="resultCard" hidden>
+              <div class="verdict-row">
+                <div>
+                  <span class="meta-label">Detection verdict</span>
+                  <div class="verdict-inline">
+                    <span class="status-pill" id="statusPill">Real</span>
+                    <strong id="confidenceText">0% confidence</strong>
+                  </div>
+                </div>
+                <span class="result-chip">AI Simulated</span>
+              </div>
+
+              <div class="progress-block">
+                <div class="progress-caption">
+                  <span>Manipulation confidence</span>
+                  <span id="progressValue">0%</span>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-bar" id="progressBar"></div>
+                </div>
+              </div>
+
+              <p class="result-summary" id="resultSummary">
+                Upload media to generate a dummy result narrative.
+              </p>
+
+              <div class="metric-grid">
+                <article class="metric-card">
+                  <span id="metricOneLabel">Pixel consistency</span>
+                  <strong id="metricOneValue">--</strong>
+                </article>
+                <article class="metric-card">
+                  <span id="metricTwoLabel">Lighting integrity</span>
+                  <strong id="metricTwoValue">--</strong>
+                </article>
+                <article class="metric-card">
+                  <span id="metricThreeLabel">Facial geometry</span>
+                  <strong id="metricThreeValue">--</strong>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-shell glass-panel reveal">
+        <div>
+          <strong>DeepVision</strong>
+          <p>Premium deepfake detection frontend concept built with HTML, CSS, and JavaScript.</p>
+        </div>
+        <div class="footer-links">
+          <a href="#hero">Overview</a>
+          <a href="#upload">Upload</a>
+          <a href="#results">Results</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
